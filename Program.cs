@@ -9,7 +9,7 @@ namespace ConsoleApplication
             Console.WriteLine($"Hello {Name()}!");
         }
         
-        public static string Name() => "asdf";
+        public static string Name() => "Michi";
     }
 
    
