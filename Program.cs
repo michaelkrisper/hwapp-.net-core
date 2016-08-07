@@ -1,17 +1,38 @@
 ﻿using System;
 
-namespace ConsoleApplication
+class Client
 {
-    public class Program
+    static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            Console.WriteLine($"Hello {Name()}!");
-        }
-        
-        public static string Name() => "Michi";
+        // Creating the adaptee
+        var adaptee = new Adaptee();
+
+        // Adapting the adaptee to ITarget
+        ITarget target = new ObjectAdapter(adaptee);
+
+        // Using ITarget Interface
+        Console.WriteLine("Calling ITarget.Request()");
+        target.Request();
     }
+}
 
-   
+// needed target interface
+interface ITarget { void Request(); }
 
+// unchangeable adaptee class
+class Adaptee
+{
+    public void Operation() { Console.WriteLine("Adaptee.Operation() called"); }
+}
+
+// adapter
+class ObjectAdapter : ITarget
+{
+    Adaptee _adaptee;
+    public ObjectAdapter(Adaptee adaptee) { _adaptee = adaptee; }
+    public void Request()
+    {
+        Console.WriteLine("ObjectAdapter.Request() called");
+        _adaptee.Operation();
+    }
 }
